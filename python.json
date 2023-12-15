@@ -1,0 +1,213 @@
+{
+    // Main Functions
+    "TIC-80 BDR": {
+        "prefix": "BDR",
+        "body": [
+			"BDR(row=${1})",
+            "$0"
+		],
+		"description": "Allows you to execute code between the drawing of each fullscreen scanline, for example, to manipulate the palette."
+    },
+    "TIC-80 BOOT": {
+        "prefix": "BOOT",
+        "body": [
+            "BOOT()",
+            "$0"
+        ],
+        "description": "Startup function."
+    },
+    "TIC-80 MENU": {
+        "prefix": "MENU",
+        "body": [
+            "MENU(index=${1})",
+            "$0"
+        ],
+        "description": "Game Menu handler."
+    },
+    "TIC-80 SCN": {
+        "prefix": "SCN",
+        "body": [
+            "def SCN(row=${1}):",
+            "\t$0"
+        ],
+        "description": "Allows you to execute code between the drawing of each scanline, for example, to manipulate the palette."
+    },
+    "TIC-80 TIC": {
+        "prefix": "TIC",
+        "body": [
+            "def TIC():",
+            "\t$0"
+        ],
+        "description": "Main function. It's called at 60fps (60 times every second)."
+    },
+
+    // init
+    "TIC-80 init": {
+        "prefix": "init",
+        "body": [
+            "def init():",
+            "\t$0",
+            "",
+            "init()"
+        ],
+        "description": "Init function TIC-80"
+    },
+
+    // Input
+    "TIC-80 btn": {
+        "prefix": "btn",
+        "body": [
+            "btn(id=${1})",
+            "$0"
+        ],
+        "description": "This function allows you to read the status of one of the buttons attached to TIC.\nThe function returns true if the key with the supplied id is currently in the pressed state.\nIt remains true for as long as the key is held down.\nIf you want to test if a key was just pressed, use `btnp()` instead."
+    },
+    "TIC-80 btnp": {
+        "prefix": "btnp",
+        "body": [
+            "btnp(id=${1}, hold=${2:-1}, period=${3:-1})",
+            "$0"
+        ],
+        "description": "This function allows you to read the status of one of TIC's buttons.\nIt returns true only if the key has been pressed since the last frame.\nYou can also use the optional hold and period parameters which allow you to check if a button is being held down.\nAfter the time specified by hold has elapsed, btnp will return true each time period is passed if the key is still down.\nFor example, to re-examine the state of button `0` after 2 seconds and continue to check its state every 1/10th of a second, you would use btnp(0, 120, 6).\nSince time is expressed in ticks and TIC runs at 60 frames per second, we use the value of 120 to wait 2 seconds and 6 ticks (ie 60/10) as the interval for re-checking."
+    },
+    "TIC-80 key": {
+        "prefix": "key",
+        "body": [
+            "key(code=${1:-1})",
+            "$0"
+        ],
+        "description": "The function returns true if the key denoted by keycode is pressed."
+    },
+    "TIC-80 keyp": {
+        "prefix": "keyp",
+        "body": [
+            "keyp(code=${1:-1}, hold=${2:-1}, period=${3:-1})",
+            "$0"
+        ],
+        "description": "This function returns true if the given key is pressed but wasn't pressed in the previous frame.\nRefer to `btnp()` for an explanation of the optional hold and period parameters."
+    },
+    "TIC-80 mouse": {
+        "prefix": "mouse",
+        "body": [
+            "mouse()",
+            "$0"
+        ],
+        "description": "This function returns the mouse coordinates and a boolean value for the state of each mouse button,with true indicating that a button is pressed."
+    },
+
+    // Drawing
+    "TIC-80 circ": {
+        "prefix": "circ",
+        "body": [
+            "circ(x=${1}, y=${2}, radius=${3}, color=${4})",
+            "$0"
+        ],
+        "description": "This function draws a filled circle of the desired radius and color with its center at x, y.\nIt uses the Bresenham algorithm."
+    },
+    "TIC-80 circb": {
+        "prefix": "circb",
+        "body": [
+            "circb(x=${1}, y=${2}, radius=${3}, color=${4})",
+            "$0"
+        ],
+        "description": "Draws the circumference of a circle with its center at x, y using the radius and color requested.\nIt uses the Bresenham algorithm."
+    },
+    "TIC-80 clip": {
+        "prefix": "clip",
+        "body": [
+            "clip(x=${1}, y=${2}, width=${3}, height=${4})",
+            "$0"
+        ],
+        "description": "This function limits drawing to a clipping region or `viewport` defined by x,y,w,h.\nThings drawn outside of this area will not be visible.\nCalling clip() with no parameters will reset the drawing area to the entire screen."
+    },
+    "TIC-80 cls": {
+        "prefix": "cls",
+        "body": [
+            "cls(color=${1:0})",
+            "$0"
+        ],
+        "description": "Clear the screen.\nWhen called this function clear all the screen using the color passed as argument.\nIf no parameter is passed first color (0) is used."
+    },
+    "TIC-80 elli": {
+        "prefix": "elli",
+        "body": [
+            "elli(x=${1}, y=${2}, a=${3}, b=${4}, color=${5})",
+            "$0"
+        ],
+        "description": "This function draws a filled ellipse of the desired a, b radiuses and color with its center at x, y.\nIt uses the Bresenham algorithm."
+    },
+    "TIC-80 ellib": {
+        "prefix": "ellib",
+        "body": [
+            "ellib(x=${1}, y=${2}, a=${3}, b=${4}, color=${5})",
+            "$0"
+        ],
+        "description": "This function draws an ellipse border with the desired radiuses a b and color with its center at x, y.\nIt uses the Bresenham algorithm."
+    },
+    "TIC-80 line": {
+        "prefix": "line",
+        "body": [
+            "line(x0=${1}, y0=${2}, x1=${3}, y1=${4}, color=${5})",
+            "$0"
+        ],
+        "description": "Draws a straight line from point (x0,y0) to point (x1,y1) in the specified color."
+    },
+    "TIC-80 pix": {},
+    "TIC-80 rect": {},
+    "TIC-80 rectb": {},
+    "TIC-80 tri": {},
+    "TIC-80 trib": {},
+    "TIC-80 ttri": {},
+
+    // Program / Interrupts
+    "TIC-80 exit": {
+        "prefix": "exit",
+        "body": [
+            "exit()",
+            "$0"
+        ],
+        "description": "Interrupts program execution and returns to the console when the TIC function ends."
+    },
+    "TIC-80 reset": {},
+    "TIC-80 time": {},
+    "TIC-80 tstamp": {},
+    "TIC-80 trace": {},
+
+    // Sprite / Map
+    "TIC-80 fget": {
+        "prefix": "fget",
+        "body": [
+            "fget(sprite_id=${1}, flag=${2})",
+            "$0"
+        ],
+        "description": "Returns true if the specified flag of the sprite is set. See `fset()` for more details."
+    },
+    "TIC-80 fset": {},
+    "TIC-80 map": {},
+    "TIC-80 mget": {},
+    "TIC-80 mset": {},
+    "TIC-80 spr": {},
+
+    // Text
+    "TIC-80 font": {},
+    "TIC-80 print": {},
+
+    // Memory
+    "TIC-80 memcpy": {},
+    "TIC-80 memset": {},
+    "TIC-80 peek": {},
+    "TIC-80 peek1": {},
+    "TIC-80 peek2": {},
+    "TIC-80 peek4": {},
+    "TIC-80 pmem": {},
+    "TIC-80 poke": {},
+    "TIC-80 poke1": {},
+    "TIC-80 poke2": {},
+    "TIC-80 poke4": {},
+    "TIC-80 sync": {},
+    "TIC-80 vbank": {},
+
+    // Sound
+    "TIC-80 music": {},
+    "TIC-80 sfx": {}
+}
